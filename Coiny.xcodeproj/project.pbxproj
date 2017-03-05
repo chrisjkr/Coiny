@@ -11,6 +11,7 @@
 		2B6CB0741E6CB45200BFEDF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CB0731E6CB45200BFEDF8 /* Assets.xcassets */; };
 		2B6CB0771E6CB45200BFEDF8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6CB0751E6CB45200BFEDF8 /* MainMenu.xib */; };
 		2B6CB07F1E6CBAE500BFEDF8 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CB07E1E6CBAE500BFEDF8 /* StatusMenuController.swift */; };
+		2B6CB0811E6CBFAB00BFEDF8 /* CoinbaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6CB0801E6CBFAB00BFEDF8 /* CoinbaseAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		2B6CB0761E6CB45200BFEDF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2B6CB0781E6CB45200BFEDF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B6CB07E1E6CBAE500BFEDF8 /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
+		2B6CB0801E6CBFAB00BFEDF8 /* CoinbaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				2B6CB0711E6CB45100BFEDF8 /* AppDelegate.swift */,
 				2B6CB0731E6CB45200BFEDF8 /* Assets.xcassets */,
 				2B6CB0751E6CB45200BFEDF8 /* MainMenu.xib */,
+				2B6CB0801E6CBFAB00BFEDF8 /* CoinbaseAPI.swift */,
 				2B6CB07E1E6CBAE500BFEDF8 /* StatusMenuController.swift */,
 				2B6CB0781E6CB45200BFEDF8 /* Info.plist */,
 			);
@@ -133,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B6CB0811E6CBFAB00BFEDF8 /* CoinbaseAPI.swift in Sources */,
 				2B6CB07F1E6CBAE500BFEDF8 /* StatusMenuController.swift in Sources */,
 				2B6CB0721E6CB45100BFEDF8 /* AppDelegate.swift in Sources */,
 			);

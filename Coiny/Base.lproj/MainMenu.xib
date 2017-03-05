@@ -16,11 +16,23 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="aPQ-1i-2n4" customClass="StatusMenuController" customModule="Coiny" customModuleProvider="target">
             <connections>
+                <outlet property="bitcoinPrice" destination="oMj-I5-UdM" id="PQV-wS-6Xp"/>
                 <outlet property="statusMenu" destination="LRZ-Jt-tnf" id="i1P-k1-EVY"/>
             </connections>
         </customObject>
         <menu id="LRZ-Jt-tnf">
             <items>
+                <menuItem title="Update" id="LM3-Xw-ML1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="updateClicked:" target="aPQ-1i-2n4" id="klS-iJ-Ony"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="ONT-eP-kSR"/>
+                <menuItem title="BTC: " id="oMj-I5-UdM">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="3QO-Ph-vaD"/>
                 <menuItem title="Quit" id="y2V-3Q-Adz">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
