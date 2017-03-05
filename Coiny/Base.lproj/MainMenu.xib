@@ -22,15 +22,52 @@
         </customObject>
         <menu id="LRZ-Jt-tnf">
             <items>
-                <menuItem title="Update" id="LM3-Xw-ML1">
+                <menuItem title="BTC: " id="oMj-I5-UdM">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="ONT-eP-kSR"/>
+                <menuItem title="Refresh" id="LM3-Xw-ML1">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="updateClicked:" target="aPQ-1i-2n4" id="klS-iJ-Ony"/>
                     </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="ONT-eP-kSR"/>
-                <menuItem title="BTC: " id="oMj-I5-UdM">
+                <menuItem title="Refresh every" id="89A-eC-dsK">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Refresh every" id="fHf-cn-a0B">
+                        <items>
+                            <menuItem title="minute" tag="1" id="NBm-r1-awn">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="4gp-Om-fmF"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="5 minutes" tag="5" id="W3e-t0-NR0">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="A7G-VU-nEz"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="10 minutes" tag="10" id="Grj-Q7-xE6">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="ze0-gg-jg3"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="30 minutes" tag="30" id="NAf-Im-405">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="JdF-Vu-DaG"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="hour" tag="60" id="VR4-MA-iTJ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="zrz-lY-LJ0"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="3QO-Ph-vaD"/>
                 <menuItem title="Quit" id="y2V-3Q-Adz">

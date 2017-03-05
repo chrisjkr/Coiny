@@ -36,6 +36,11 @@ class StatusMenuController: NSObject {
         updatePrices()
     }
     
+    @IBAction func changeUpdateInterval(_ sender: NSMenuItem) {
+        updateInterval = Double(sender.tag * 60)
+        NSLog("will now refresh every \(updateInterval) seconds")
+    }
+    
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         timer.invalidate()
         NSApplication.shared().terminate(self)
