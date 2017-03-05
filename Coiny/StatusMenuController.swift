@@ -14,12 +14,15 @@ class StatusMenuController: NSObject {
     
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     let coinbaseAPI = CoinbaseAPI()
+    var timer = Timer()
+    var updateInterval: Double = 60
     
     override func awakeFromNib() {
         statusItem.title = "Fetching..."
         statusItem.menu = statusMenu
         
         updatePrices()
+        timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(self.updatePrices), userInfo: nil, repeats: true)
     }
     
     func updatePrices() {
@@ -34,6 +37,7 @@ class StatusMenuController: NSObject {
     }
     
     @IBAction func quitClicked(_ sender: NSMenuItem) {
+        timer.invalidate()
         NSApplication.shared().terminate(self)
     }
 }
