@@ -21,7 +21,7 @@ class StatusMenuController: NSObject {
     @IBOutlet weak var showDecimals: NSMenuItem!
     
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
-    let coinbaseAPI = CoinbaseAPI()
+    let coinAPI = CoinAPI()
     var timer = Timer()
     let defaults = UserDefaults.standard
     
@@ -43,7 +43,7 @@ class StatusMenuController: NSObject {
     }
     
     func updatePrices() {
-        coinbaseAPI.fetchBitcoinPrice() { amount in
+        coinAPI.fetchBitcoinPrice() { amount in
             self.btcPrice = amount
             self.updateView()
         }

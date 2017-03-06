@@ -8,18 +8,16 @@
 
 import Foundation
 
-class CoinbaseAPI {
-    let COINBASE_URL = "https://api.coinbase.com/v2"
+class CoinAPI {
+    let COINBASE_URL = "https://coinmarketcap-nexuist.rhcloud.com/api"
     
     func fetchBitcoinPrice(success: @escaping (Double) -> Void) {
         let session = URLSession.shared
         
-        let url = URL(string: "\(COINBASE_URL)/prices/BTC-USD/spot")
-        let request = NSMutableURLRequest(url: url!)
-        request.addValue("2017-03-05", forHTTPHeaderField: "CB-VERSION")
-        let task = session.dataTask(with: request as URLRequest) { data, response, err in
+        let url = URL(string: "\(COINBASE_URL)/btc")
+        let task = session.dataTask(with: url!) { data, response, err in
             if let error = err {
-                NSLog("Coinbase API error: \(error)")
+                NSLog("API error: \(error)")
             }
             
             if let httpResponse = response as? HTTPURLResponse {
@@ -27,17 +25,17 @@ class CoinbaseAPI {
                 case 200:
                     do {
                         let parsed = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                        let data = parsed["data"] as! [String: Any]
-                        let amount = data["amount"] as! String
+                        let data = parsed["price"] as! [String: Any]
+                        let amount = data["usd"] as! Double
                         
-                        success(Double(amount)!)
+                        success(amount)
                         
                     } catch let error as NSError {
                         NSLog(error.localizedDescription)
                     }
                     
                 default:
-                    NSLog("Coinbase API returned response \(httpResponse.statusCode) \(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))")
+                    NSLog("API returned response \(httpResponse.statusCode) \(HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))")
                 }
             }
         }
