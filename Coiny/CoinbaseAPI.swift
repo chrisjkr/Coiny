@@ -11,10 +11,10 @@ import Foundation
 class CoinbaseAPI {
     let COINBASE_URL = "https://api.coinbase.com/v2"
     
-    func fetchBitcoinPrice(success: @escaping (String) -> Void) {
+    func fetchBitcoinPrice(success: @escaping (Double) -> Void) {
         let session = URLSession.shared
         
-        let url = URL(string: "\(COINBASE_URL)/prices/BTC-USD/buy")
+        let url = URL(string: "\(COINBASE_URL)/prices/BTC-USD/spot")
         let request = NSMutableURLRequest(url: url!)
         request.addValue("2017-03-05", forHTTPHeaderField: "CB-VERSION")
         let task = session.dataTask(with: request as URLRequest) { data, response, err in
@@ -29,7 +29,8 @@ class CoinbaseAPI {
                         let parsed = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
                         let data = parsed["data"] as! [String: Any]
                         let amount = data["amount"] as! String
-                        success(amount)
+                        
+                        success(Double(amount)!)
                         
                     } catch let error as NSError {
                         NSLog(error.localizedDescription)
