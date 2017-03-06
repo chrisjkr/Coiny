@@ -9,12 +9,12 @@
 import Foundation
 
 class CoinAPI {
-    let COINBASE_URL = "https://coinmarketcap-nexuist.rhcloud.com/api"
+    let API_URL = "https://coinmarketcap-nexuist.rhcloud.com/api"
     
-    func fetchBitcoinPrice(success: @escaping (Double) -> Void) {
+    func fetchPrice(_ symbol: String, success: @escaping (Double) -> Void) {
         let session = URLSession.shared
         
-        let url = URL(string: "\(COINBASE_URL)/btc")
+        let url = URL(string: "\(API_URL)/\(symbol)")
         let task = session.dataTask(with: url!) { data, response, err in
             if let error = err {
                 NSLog("API error: \(error)")

@@ -21,7 +21,6 @@
                 <outlet property="every30" destination="NAf-Im-405" id="ztU-hI-cUG"/>
                 <outlet property="every5" destination="W3e-t0-NR0" id="1LP-f5-XPz"/>
                 <outlet property="everyHour" destination="VR4-MA-iTJ" id="6Fu-4e-B0l"/>
-                <outlet property="everyMinute" destination="NBm-r1-awn" id="gA5-Qm-NR1"/>
                 <outlet property="showDecimals" destination="F4U-MG-sbO" id="rco-Pl-nqz"/>
                 <outlet property="statusMenu" destination="LRZ-Jt-tnf" id="i1P-k1-EVY"/>
             </connections>
@@ -42,12 +41,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Refresh every" id="fHf-cn-a0B">
                         <items>
-                            <menuItem title="minute" tag="1" id="NBm-r1-awn">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="4gp-Om-fmF"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="5 minutes" tag="5" id="W3e-t0-NR0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -87,6 +80,12 @@
                             </menuItem>
                         </items>
                     </menu>
+                </menuItem>
+                <menuItem title="Preferences..." id="FtP-9n-mUv">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="preferencesClicked:" target="aPQ-1i-2n4" id="df7-Gc-xYi"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="3QO-Ph-vaD"/>
                 <menuItem title="Quit" id="y2V-3Q-Adz">
