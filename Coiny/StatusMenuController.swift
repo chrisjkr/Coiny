@@ -31,6 +31,8 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
         // User settings
         var updateInterval: Double = defaults.double(forKey: "updateInterval")
         updateInterval = updateInterval < 60 ? 60 : updateInterval
+        defaults.set(defaults.array(forKey: "currencies") ?? ["btc"], forKey: "currencies")
+
         
         updatePrices()
         timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(self.updatePrices), userInfo: nil, repeats: true)

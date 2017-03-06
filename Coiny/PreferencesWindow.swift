@@ -19,6 +19,8 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
 
     @IBOutlet weak var intervalSlider: NSSlider!
     @IBOutlet weak var showDecimals: NSButton!
+    @IBOutlet weak var currencyList: NSTextField!
+    @IBOutlet weak var addCurrencyText: NSTextField!
     
     var defaults = UserDefaults.standard
 
@@ -33,8 +35,19 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
         self.window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
         
+        updateView()
+    }
+    
+    func updateView() {
         intervalSlider.doubleValue = defaults.double(forKey: "updateInterval")
         showDecimals.state = defaults.bool(forKey: "showDecimals") ? 1 : 0
+        
+        var currenciesString: String = ""
+        let currencies = defaults.array(forKey: "currencies")
+        for currency in currencies as! [String] {
+            currenciesString = currenciesString + "\n\(currency)"
+        }
+        currencyList.stringValue = currenciesString
     }
     
     @IBAction func intervalSliderUsed(_ sender: NSSliderCell) {
@@ -48,6 +61,15 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
     @IBAction func showDecimalsUsed(_ sender: NSButton) {
         defaults.set(!defaults.bool(forKey: "showDecimals"), forKey: "showDecimals")
         delegate?.showDecimalsStateChanged()
+    }
+    
+    
+    @IBAction func AddCurrency(_ sender: NSButton) {
+        if let currency = addCurrencyText?.stringValue {
+            var currencies = defaults.array(forKey: "currencies")
+            currencies?.append(currency)
+            defaults.set(currencies, forKey: "currencies")
+        }
     }
     
     func windowWillClose(_ notification: Notification) {
