@@ -27,8 +27,16 @@ class StatusMenuController: NSObject {
     
     func updatePrices() {
         coinbaseAPI.fetchBitcoinPrice() { amount in
-            self.bitcoinPrice.title = "BTC: $\(amount)"
-            self.statusItem.title = "$\(amount)"
+            self.bitcoinPrice.title = "BTC: $\(self.convertPrice(amount))"
+            self.statusItem.title = "$\(self.convertPrice(amount))"
+        }
+    }
+    
+    func convertPrice(_ amount: Double) -> String {
+        if amount > 1000 {
+            return String(Int(round(amount)))
+        } else {
+            return String(amount)
         }
     }
     
