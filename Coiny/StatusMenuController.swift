@@ -12,8 +12,6 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var bitcoinPrice: NSMenuItem!
     
-    @IBOutlet weak var showDecimals: NSMenuItem!
-    
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     let coinAPI = CoinAPI()
     var timer = Timer()
@@ -33,8 +31,6 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
         // User settings
         var updateInterval: Double = defaults.double(forKey: "updateInterval")
         updateInterval = updateInterval < 60 ? 60 : updateInterval
-        
-        showDecimals.state = defaults.bool(forKey: "showDecimalsOver1000") ? 1 : 0
         
         updatePrices()
         timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(self.updatePrices), userInfo: nil, repeats: true)
