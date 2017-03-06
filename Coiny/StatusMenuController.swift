@@ -12,11 +12,6 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var bitcoinPrice: NSMenuItem!
     
-    @IBOutlet weak var every5: NSMenuItem!
-    @IBOutlet weak var every10: NSMenuItem!
-    @IBOutlet weak var every30: NSMenuItem!
-    @IBOutlet weak var everyHour: NSMenuItem!
-    
     @IBOutlet weak var showDecimals: NSMenuItem!
     
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
@@ -38,7 +33,6 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
         // User settings
         var updateInterval: Double = defaults.double(forKey: "updateInterval")
         updateInterval = updateInterval < 60 ? 60 : updateInterval
-        toggleRefreshIntervalStates(updateInterval)
         
         showDecimals.state = defaults.bool(forKey: "showDecimalsOver1000") ? 1 : 0
         
@@ -59,23 +53,11 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
     }
     
     func convertPrice(_ amount: Double) -> String {
-        if amount > 1000 && !defaults.bool(forKey: "showDecimalsOver1000") {
+        if amount > 1000 && !defaults.bool(forKey: "showDecimals") {
             return String(Int(round(amount)))
         } else {
             return String(amount)
         }
-    }
-    
-    func toggleRefreshIntervalStates (_ interval: Double) {
-        let tag = Int(interval / 60)
-        every5.state = every5.tag == tag ? 1 : 0
-        every10.state = every10.tag == tag ? 1 : 0
-        every30.state = every30.tag == tag ? 1 : 0
-        everyHour.state = everyHour.tag == tag ? 1 : 0
-    }
-    
-    func setIntervalSliderValue (_ interval: Double) {
-        
     }
     
     @IBAction func updateClicked(_ sender: NSMenuItem) {
@@ -86,15 +68,8 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
         preferencesWindow.showWindow(nil)
     }
     
-    @IBAction func changeUpdateInterval(_ sender: NSMenuItem) {
-        let newInterval = Double(sender.tag * 60)
-        defaults.set(newInterval, forKey: "updateInterval")
-        toggleRefreshIntervalStates(newInterval)
-    }
-    
-    
     @IBAction func toggleShowDecimals(_ sender: NSMenuItem) {
-        defaults.set(!defaults.bool(forKey: "showDecimalsOver1000"), forKey: "showDecimalsOver1000")
+        defaults.set(!defaults.bool(forKey: "showDecimals"), forKey: "showDecimals")
         sender.state = sender.state == 1 ? 0 : 1
         updateView()
     }
@@ -106,5 +81,9 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
     
     func preferencesDidClose() {
         NSLog("App knows preferences were just closed.")
+    }
+    
+    func showDecimalsStateChanged() {
+        updateView()
     }
 }

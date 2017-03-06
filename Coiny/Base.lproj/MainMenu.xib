@@ -17,11 +17,6 @@
         <customObject id="aPQ-1i-2n4" customClass="StatusMenuController" customModule="Coiny" customModuleProvider="target">
             <connections>
                 <outlet property="bitcoinPrice" destination="oMj-I5-UdM" id="PQV-wS-6Xp"/>
-                <outlet property="every10" destination="Grj-Q7-xE6" id="Zuo-Jq-GyN"/>
-                <outlet property="every30" destination="NAf-Im-405" id="ztU-hI-cUG"/>
-                <outlet property="every5" destination="W3e-t0-NR0" id="1LP-f5-XPz"/>
-                <outlet property="everyHour" destination="VR4-MA-iTJ" id="6Fu-4e-B0l"/>
-                <outlet property="showDecimals" destination="F4U-MG-sbO" id="rco-Pl-nqz"/>
                 <outlet property="statusMenu" destination="LRZ-Jt-tnf" id="i1P-k1-EVY"/>
             </connections>
         </customObject>
@@ -36,50 +31,6 @@
                     <connections>
                         <action selector="updateClicked:" target="aPQ-1i-2n4" id="klS-iJ-Ony"/>
                     </connections>
-                </menuItem>
-                <menuItem title="Refresh every" id="89A-eC-dsK">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Refresh every" id="fHf-cn-a0B">
-                        <items>
-                            <menuItem title="5 minutes" tag="5" id="W3e-t0-NR0">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="A7G-VU-nEz"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="10 minutes" tag="10" id="Grj-Q7-xE6">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="ze0-gg-jg3"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="30 minutes" tag="30" id="NAf-Im-405">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="JdF-Vu-DaG"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="hour" tag="60" id="VR4-MA-iTJ">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="changeUpdateInterval:" target="aPQ-1i-2n4" id="zrz-lY-LJ0"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
-                <menuItem title="Settings" id="PfQ-MC-wxF">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Settings" id="9EE-bw-Dk9">
-                        <items>
-                            <menuItem title="Show decimals over $1000" id="F4U-MG-sbO">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="toggleShowDecimals:" target="aPQ-1i-2n4" id="tjd-kJ-DZe"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                 </menuItem>
                 <menuItem title="Preferences..." id="FtP-9n-mUv">
                     <modifierMask key="keyEquivalentModifierMask"/>
