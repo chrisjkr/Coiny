@@ -8,11 +8,10 @@
 
 import Cocoa
 
-class StatusMenuController: NSObject {
+class StatusMenuController: NSObject, PreferencesWindowDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var bitcoinPrice: NSMenuItem!
     
-    @IBOutlet weak var everyMinute: NSMenuItem!
     @IBOutlet weak var every5: NSMenuItem!
     @IBOutlet weak var every10: NSMenuItem!
     @IBOutlet weak var every30: NSMenuItem!
@@ -27,9 +26,14 @@ class StatusMenuController: NSObject {
     
     var btcPrice: Double!
     
+    var preferencesWindow: PreferencesWindow!
+    
     override func awakeFromNib() {
         statusItem.title = "Fetching..."
         statusItem.menu = statusMenu
+        
+        preferencesWindow = PreferencesWindow()
+        preferencesWindow.delegate = self
         
         // User settings
         var updateInterval: Double = defaults.double(forKey: "updateInterval")
@@ -43,7 +47,7 @@ class StatusMenuController: NSObject {
     }
     
     func updatePrices() {
-        coinAPI.fetchBitcoinPrice() { amount in
+        coinAPI.fetchPrice("btc") { amount in
             self.btcPrice = amount
             self.updateView()
         }
@@ -64,15 +68,22 @@ class StatusMenuController: NSObject {
     
     func toggleRefreshIntervalStates (_ interval: Double) {
         let tag = Int(interval / 60)
-        everyMinute.state = everyMinute.tag == tag ? 1 : 0
         every5.state = every5.tag == tag ? 1 : 0
         every10.state = every10.tag == tag ? 1 : 0
         every30.state = every30.tag == tag ? 1 : 0
         everyHour.state = everyHour.tag == tag ? 1 : 0
     }
     
+    func setIntervalSliderValue (_ interval: Double) {
+        
+    }
+    
     @IBAction func updateClicked(_ sender: NSMenuItem) {
         updatePrices()
+    }
+    
+    @IBAction func preferencesClicked(_ sender: NSMenuItem) {
+        preferencesWindow.showWindow(nil)
     }
     
     @IBAction func changeUpdateInterval(_ sender: NSMenuItem) {
@@ -91,5 +102,9 @@ class StatusMenuController: NSObject {
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         timer.invalidate()
         NSApplication.shared().terminate(self)
+    }
+    
+    func preferencesDidClose() {
+        NSLog("App knows preferences were just closed.")
     }
 }
