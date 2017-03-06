@@ -18,11 +18,14 @@ class StatusMenuController: NSObject {
     @IBOutlet weak var every30: NSMenuItem!
     @IBOutlet weak var everyHour: NSMenuItem!
     
+    @IBOutlet weak var showDecimals: NSMenuItem!
     
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     let coinbaseAPI = CoinbaseAPI()
     var timer = Timer()
     let defaults = UserDefaults.standard
+    
+    var btcPrice: Double!
     
     override func awakeFromNib() {
         statusItem.title = "Fetching..."
@@ -33,7 +36,7 @@ class StatusMenuController: NSObject {
         updateInterval = updateInterval < 60 ? 60 : updateInterval
         toggleRefreshIntervalStates(updateInterval)
         
-        var showDecimalsOver1000 = defaults.bool(forKey: "showDecimalsOver1000")
+        showDecimals.state = defaults.bool(forKey: "showDecimalsOver1000") ? 1 : 0
         
         updatePrices()
         timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(self.updatePrices), userInfo: nil, repeats: true)
@@ -41,13 +44,18 @@ class StatusMenuController: NSObject {
     
     func updatePrices() {
         coinbaseAPI.fetchBitcoinPrice() { amount in
-            self.bitcoinPrice.title = "BTC: $\(self.convertPrice(amount))"
-            self.statusItem.title = "$\(self.convertPrice(amount))"
+            self.btcPrice = amount
+            self.updateView()
         }
     }
     
+    func updateView() {
+        bitcoinPrice.title = "BTC: $\(convertPrice(btcPrice))"
+        statusItem.title = "$\(convertPrice(btcPrice))"
+    }
+    
     func convertPrice(_ amount: Double) -> String {
-        if amount > 1000 {
+        if amount > 1000 && !defaults.bool(forKey: "showDecimalsOver1000") {
             return String(Int(round(amount)))
         } else {
             return String(amount)
@@ -71,6 +79,13 @@ class StatusMenuController: NSObject {
         let newInterval = Double(sender.tag * 60)
         defaults.set(newInterval, forKey: "updateInterval")
         toggleRefreshIntervalStates(newInterval)
+    }
+    
+    
+    @IBAction func toggleShowDecimals(_ sender: NSMenuItem) {
+        defaults.set(!defaults.bool(forKey: "showDecimalsOver1000"), forKey: "showDecimalsOver1000")
+        sender.state = sender.state == 1 ? 0 : 1
+        updateView()
     }
     
     @IBAction func quitClicked(_ sender: NSMenuItem) {

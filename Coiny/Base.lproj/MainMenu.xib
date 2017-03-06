@@ -22,6 +22,7 @@
                 <outlet property="every5" destination="W3e-t0-NR0" id="1LP-f5-XPz"/>
                 <outlet property="everyHour" destination="VR4-MA-iTJ" id="6Fu-4e-B0l"/>
                 <outlet property="everyMinute" destination="NBm-r1-awn" id="gA5-Qm-NR1"/>
+                <outlet property="showDecimals" destination="F4U-MG-sbO" id="rco-Pl-nqz"/>
                 <outlet property="statusMenu" destination="LRZ-Jt-tnf" id="i1P-k1-EVY"/>
             </connections>
         </customObject>
@@ -80,6 +81,9 @@
                         <items>
                             <menuItem title="Show decimals over $1000" id="F4U-MG-sbO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleShowDecimals:" target="aPQ-1i-2n4" id="tjd-kJ-DZe"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
