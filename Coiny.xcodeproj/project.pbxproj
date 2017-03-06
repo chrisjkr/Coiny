@@ -22,6 +22,7 @@
 		2B6CB0781E6CB45200BFEDF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B6CB07E1E6CBAE500BFEDF8 /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		2B6CB0801E6CBFAB00BFEDF8 /* CoinbaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseAPI.swift; sourceTree = "<group>"; };
+		2B6CB0821E6CF43F00BFEDF8 /* Coiny.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coiny.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 		2B6CB0701E6CB45100BFEDF8 /* Coiny */ = {
 			isa = PBXGroup;
 			children = (
+				2B6CB0821E6CF43F00BFEDF8 /* Coiny.entitlements */,
 				2B6CB0711E6CB45100BFEDF8 /* AppDelegate.swift */,
 				2B6CB0731E6CB45200BFEDF8 /* Assets.xcassets */,
 				2B6CB0751E6CB45200BFEDF8 /* MainMenu.xib */,
@@ -98,6 +100,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 655BH5DG56;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -250,10 +257,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Coiny/Coiny.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 655BH5DG56;
 				INFOPLIST_FILE = Coiny/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = co.krszwsk.Coiny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -264,10 +273,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Coiny/Coiny.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 655BH5DG56;
 				INFOPLIST_FILE = Coiny/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = co.krszwsk.Coiny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
