@@ -35,6 +35,7 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
     self.window?.center()
     self.window?.makeKeyAndOrderFront(nil)
     NSApp.activate(ignoringOtherApps: true)
+    window?.level = Int(CGWindowLevelForKey(.floatingWindow))
     
     currencyTable.delegate = self
     currencyTable.dataSource = self
@@ -45,8 +46,8 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
   func updateView() {
     intervalSlider.doubleValue = defaults.double(forKey: "updateInterval")
     showDecimals.state = defaults.bool(forKey: "showDecimals") ? 1 : 0
-        
-      
+    
+    currencyTable.reloadData()
   }
     
   @IBAction func intervalSliderUsed(_ sender: NSSliderCell) {

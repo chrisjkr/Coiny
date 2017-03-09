@@ -12,7 +12,7 @@
                 <outlet property="currencyTable" destination="gZu-Kr-2mZ" id="1dz-IC-c8e"/>
                 <outlet property="intervalSlider" destination="xcm-Bn-qrh" id="47e-rI-bav"/>
                 <outlet property="showDecimals" destination="vrh-wa-6Lt" id="hYv-6e-UyC"/>
-                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="5cD-TL-Z2j"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
