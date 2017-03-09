@@ -50,7 +50,16 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
     
     currencyTable.reloadData()
   }
-    
+  
+  func displayWarning(title: String, description: String) {
+    let popup = NSAlert()
+    popup.messageText = title
+    popup.informativeText = description
+    popup.alertStyle = NSAlertStyle.warning
+    popup.addButton(withTitle: "OK")
+    popup.runModal()
+  }
+  
   @IBAction func intervalSliderUsed(_ sender: NSSliderCell) {
     
       let event = NSApplication.shared().currentEvent
@@ -74,12 +83,8 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
         currencies.append(currency)
         defaults.set(currencies, forKey: "currencies")
       } else {
-        let popup = NSAlert()
-        popup.messageText = "Duplicate currency"
-        popup.informativeText = "Currency you are trying to add is already saved."
-        popup.alertStyle = NSAlertStyle.warning
-        popup.addButton(withTitle: "OK")
-        popup.runModal()
+        displayWarning(title: "Duplicate currency", description: "Currency you are trying to add is already saved.")
+        return
       }
       updateView()
     }
@@ -88,9 +93,13 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
   @IBAction func removeCurrency(_ sender: NSButton) {
     
     var currencies = defaults.array(forKey: "currencies")!
-    currencies.remove(at: currencyTable.selectedRow)
-    defaults.set(currencies, forKey: "currencies")
-    updateView()
+    if currencies.count == 1 {
+      displayWarning(title: "Cannot delete the only currency", description: "You need to have at least 1 currency present.")
+    } else {
+      currencies.remove(at: currencyTable.selectedRow)
+      defaults.set(currencies, forKey: "currencies")
+      updateView()
+    }
   }
   
   func windowWillClose(_ notification: Notification) {
