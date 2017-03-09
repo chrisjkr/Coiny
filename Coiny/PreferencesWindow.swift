@@ -70,6 +70,7 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
       currencies?.append(currency)
       defaults.set(currencies, forKey: "currencies")
       addCurrencyText.stringValue = ""
+      updateView()
     }
   }
     
