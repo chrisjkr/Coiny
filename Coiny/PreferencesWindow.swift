@@ -65,15 +65,16 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
     
     
   @IBAction func AddCurrency(_ sender: NSButton) {
-      if let currency = addCurrencyText?.stringValue {
-          var currencies = defaults.array(forKey: "currencies")
-          currencies?.append(currency)
-          defaults.set(currencies, forKey: "currencies")
-      }
+    if let currency = addCurrencyText?.stringValue {
+      var currencies = defaults.array(forKey: "currencies")
+      currencies?.append(currency)
+      defaults.set(currencies, forKey: "currencies")
+      addCurrencyText.stringValue = ""
+    }
   }
     
   func windowWillClose(_ notification: Notification) {
-      delegate?.preferencesDidClose()
+    delegate?.preferencesDidClose()
   }
 }
 
