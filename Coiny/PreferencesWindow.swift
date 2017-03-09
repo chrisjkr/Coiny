@@ -65,14 +65,22 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
       defaults.set(!defaults.bool(forKey: "showDecimals"), forKey: "showDecimals")
       delegate?.showDecimalsStateChanged()
   }
-    
-    
+  
   @IBAction func AddCurrency(_ sender: NSButton) {
     if let currency = addCurrencyText?.stringValue {
-      var currencies = defaults.array(forKey: "currencies")
-      currencies?.append(currency)
-      defaults.set(currencies, forKey: "currencies")
       addCurrencyText.stringValue = ""
+      var currencies = defaults.array(forKey: "currencies") as! [String]
+      if !currencies.contains(currency) {
+        currencies.append(currency)
+        defaults.set(currencies, forKey: "currencies")
+      } else {
+        let popup = NSAlert()
+        popup.messageText = "Duplicate currency"
+        popup.informativeText = "Currency you are trying to add is already saved."
+        popup.alertStyle = NSAlertStyle.warning
+        popup.addButton(withTitle: "OK")
+        popup.runModal()
+      }
       updateView()
     }
   }
@@ -84,7 +92,7 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
     defaults.set(currencies, forKey: "currencies")
     updateView()
   }
-    
+  
   func windowWillClose(_ notification: Notification) {
     delegate?.preferencesDidClose()
   }
