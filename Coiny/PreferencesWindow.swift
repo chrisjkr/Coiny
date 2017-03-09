@@ -22,7 +22,8 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var currencyList: NSTextField!
   @IBOutlet weak var addCurrencyText: NSTextField!
   @IBOutlet weak var currencyTable: NSTableView!
-    
+  @IBOutlet weak var removeCurrencyButton: NSButton!
+  
   var defaults = UserDefaults.standard
 
   override var windowNibName: String! {
@@ -39,7 +40,7 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
     
     currencyTable.delegate = self
     currencyTable.dataSource = self
-    
+
     updateView()
   }
   
@@ -51,6 +52,7 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
   }
     
   @IBAction func intervalSliderUsed(_ sender: NSSliderCell) {
+    
       let event = NSApplication.shared().currentEvent
         
       if event?.type == NSEventType.leftMouseUp {
@@ -59,6 +61,7 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
   }
     
   @IBAction func showDecimalsUsed(_ sender: NSButton) {
+    
       defaults.set(!defaults.bool(forKey: "showDecimals"), forKey: "showDecimals")
       delegate?.showDecimalsStateChanged()
   }
@@ -72,6 +75,14 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
       addCurrencyText.stringValue = ""
       updateView()
     }
+  }
+  
+  @IBAction func removeCurrency(_ sender: NSButton) {
+    
+    var currencies = defaults.array(forKey: "currencies")!
+    currencies.remove(at: currencyTable.selectedRow)
+    defaults.set(currencies, forKey: "currencies")
+    updateView()
   }
     
   func windowWillClose(_ notification: Notification) {
@@ -94,10 +105,13 @@ extension PreferencesWindow: NSTableViewDelegate {
     
     if let cell = tableView.make(withIdentifier: "CurrencyCellID", owner: nil) as? NSTableCellView {
       cell.textField?.stringValue = item
-      NSLog(item)
       return cell
     }
     
     return nil
+  }
+  
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    removeCurrencyButton.isEnabled = currencyTable.selectedRowIndexes.count > 0
   }
 }
