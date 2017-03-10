@@ -65,6 +65,7 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate, NSTableViewDele
   func updateView() {
     //bitcoinPrice.title = "BTC: $\(convertPrice(btcPrice))"
     //statusItem.title = "$\(convertPrice(btcPrice))"
+    priceTable.reloadData()
   }
     
   func convertPrice(_ amount: Double) -> String {
