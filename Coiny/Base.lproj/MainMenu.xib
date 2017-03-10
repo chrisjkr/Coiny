@@ -17,7 +17,6 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="aPQ-1i-2n4" customClass="StatusMenuController" customModule="Coiny" customModuleProvider="target">
             <connections>
-                <outlet property="bitcoinPrice" destination="oMj-I5-UdM" id="PQV-wS-6Xp"/>
                 <outlet property="priceTable" destination="mua-tf-bTl" id="8Fh-w9-bmH"/>
                 <outlet property="priceView" destination="AWX-mQ-EIZ" id="5UD-Qz-P4f"/>
                 <outlet property="pricesMenuItem" destination="RdH-a8-Lu7" id="Qvi-sG-cta"/>
@@ -26,9 +25,6 @@
         </customObject>
         <menu id="LRZ-Jt-tnf">
             <items>
-                <menuItem title="BTC: " id="oMj-I5-UdM">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
                 <menuItem title="Prices" id="RdH-a8-Lu7">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
@@ -55,7 +51,7 @@
         </menu>
         <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="AWX-mQ-EIZ">
             <rect key="frame" x="0.0" y="0.0" width="240" height="135"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <clipView key="contentView" id="hCD-9Q-c6c">
                 <rect key="frame" x="1" y="1" width="238" height="133"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

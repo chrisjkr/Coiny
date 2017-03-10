@@ -15,19 +15,15 @@ struct Currency {
 
 class StatusMenuController: NSObject, PreferencesWindowDelegate, NSTableViewDelegate, NSTableViewDataSource {
   @IBOutlet weak var statusMenu: NSMenu!
-  @IBOutlet weak var bitcoinPrice: NSMenuItem!
     
   let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
   let coinAPI = CoinAPI()
   var timer = Timer()
   let defaults = UserDefaults.standard
-    
-  var btcPrice: Double!
-  
-  var prices: [Currency] = []
   
   var preferencesWindow: PreferencesWindow!
   
+  var prices: [Currency] = []
   @IBOutlet weak var pricesMenuItem: NSMenuItem!
   @IBOutlet weak var priceTable: NSTableView!
   @IBOutlet weak var priceView: NSScrollView!
@@ -56,15 +52,12 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate, NSTableViewDele
     for currency in currencies {
       coinAPI.fetchPrice(currency) { amount in
         self.prices.append(Currency(symbol: currency, price: amount))
-        NSLog("symbol: \(currency) amount: \(amount)")
+        self.updateView()
       }
     }
-    updateView()
   }
     
   func updateView() {
-    //bitcoinPrice.title = "BTC: $\(convertPrice(btcPrice))"
-    //statusItem.title = "$\(convertPrice(btcPrice))"
     priceTable.reloadData()
   }
     
