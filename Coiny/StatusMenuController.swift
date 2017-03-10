@@ -13,7 +13,7 @@ struct Currency {
   var price: Double
 }
 
-class StatusMenuController: NSObject, PreferencesWindowDelegate {
+class StatusMenuController: NSObject, PreferencesWindowDelegate, NSTableViewDelegate, NSTableViewDataSource {
   @IBOutlet weak var statusMenu: NSMenu!
   @IBOutlet weak var bitcoinPrice: NSMenuItem!
     
@@ -27,6 +27,10 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
   var prices: [Currency] = []
   
   var preferencesWindow: PreferencesWindow!
+  
+  @IBOutlet weak var pricesMenuItem: NSMenuItem!
+  @IBOutlet weak var priceTable: NSTableView!
+  @IBOutlet weak var priceView: NSScrollView!
     
   override func awakeFromNib() {
     statusItem.title = "Fetching..."
@@ -34,6 +38,8 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
         
     preferencesWindow = PreferencesWindow()
     preferencesWindow.delegate = self
+    
+    pricesMenuItem.view = priceView
         
     // User settings
     var updateInterval: Double = defaults.double(forKey: "updateInterval")
@@ -95,4 +101,33 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate {
   func showDecimalsStateChanged() {
     updateView()
   }
+  
+  // MARK: - Price Table
+  
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return prices.count
+  }
+  
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    
+    var text: String = ""
+    var cellIdentifier: String = ""
+    let item = prices[row]
+    
+    if tableColumn == priceTable.tableColumns[0] {
+      text = item.symbol
+      cellIdentifier = "SymbolCell"
+    } else if tableColumn == priceTable.tableColumns[1] {
+      text = convertPrice(item.price)
+      cellIdentifier = "PriceCell"
+    }
+    
+    if let cell = tableView.make(withIdentifier: cellIdentifier, owner: nil) as? NSTableCellView {
+      cell.textField?.stringValue = text
+      return cell
+    }
+    
+    return nil
+  }
+  
 }
