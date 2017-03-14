@@ -49,7 +49,7 @@
             </items>
             <point key="canvasLocation" x="58.5" y="150.5"/>
         </menu>
-        <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="AWX-mQ-EIZ">
+        <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="AWX-mQ-EIZ">
             <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <clipView key="contentView" id="hCD-9Q-c6c">
@@ -138,11 +138,11 @@
                 </subviews>
             </clipView>
             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="iUt-pr-tHl">
-                <rect key="frame" x="1" y="118" width="237.85585021972656" height="15"/>
+                <rect key="frame" x="-100" y="-100" width="237.85585021972656" height="15"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="X4t-TR-rUs">
-                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                <rect key="frame" x="-100" y="-100" width="15" height="102"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <point key="canvasLocation" x="58" y="306"/>
