@@ -24,6 +24,8 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate, NSTableViewDele
   var preferencesWindow: PreferencesWindow!
   
   var prices: [Currency] = []
+  var newPrices: [Currency] = []
+  
   @IBOutlet weak var pricesMenuItem: NSMenuItem!
   @IBOutlet weak var priceTable: NSTableView!
   @IBOutlet weak var priceView: NSScrollView!
@@ -48,13 +50,16 @@ class StatusMenuController: NSObject, PreferencesWindowDelegate, NSTableViewDele
   }
     
   func updatePrices() {
+    
     let currencies = defaults.array(forKey: "currencies") as! [String]
     for currency in currencies {
       coinAPI.fetchPrice(currency) { amount in
-        self.prices.append(Currency(symbol: currency, price: amount))
-        self.updateView()
+        self.newPrices.append(Currency(symbol: currency, price: amount))
       }
     }
+    prices = newPrices
+    self.updateView()
+    newPrices.removeAll()
   }
     
   func updateView() {
